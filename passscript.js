@@ -17,3 +17,5 @@ function readFile() {
 
     reader.readAsText(file);  // Read the file as a text file
 }
+
+
