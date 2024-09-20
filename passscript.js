@@ -35,8 +35,8 @@ document.getElementById('op_tab_input').addEventListener('change', function () {
 });
 
 function readTextarea() {
-    const source_text = document.getElementById('source_code_input_text').textContent;
-    const optab_text = document.getElementById('optab_input_text').textContent;
+    const source_text = document.getElementById('source_code_input_text').value;
+    const optab_text = document.getElementById('optab_input_text').value;
 
     // Process source text
     if (source_text.trim() === "") {
