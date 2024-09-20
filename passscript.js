@@ -40,7 +40,7 @@ function readTextarea() {
 
     // Process source text
     if (source_text.trim() === "") {
-        console.log('Please enter the source code.');
+       // alert('Please enter the source code.');
     } else {
         console.log('source code:', source_text);
         inputArr = source_text.split('\n').map(line => line.trim().split(/\s+/));
@@ -49,7 +49,7 @@ function readTextarea() {
 
     // Process optab text
     if (optab_text.trim() === "") {
-        console.log('Please enter the optab.');
+       // alert('Please enter the optab.');
     } else {
         console.log('optab:', optab_text);
         optabArr = optab_text.split('\n').map(line => line.trim().split(/\s+/));
@@ -61,11 +61,22 @@ document.getElementById('assembleBtn').addEventListener('click', readTextarea);
 document.getElementById('resetBtn').addEventListener('click', function () {
     document.getElementById('source_code_input_text').textContent = '';
     document.getElementById('optab_input_text').textContent = '';
+    document.getElementById('intermediateBody').innerHTML = '';
+    document.getElementById('symtabBody').innerHTML = '';
+    document.getElementById('objectcodeBody').innerHTML = '';
+    document.getElementById('outputBody').innerHTML = '';
+
 });
 
 // Ensure inputArr and optabArr are available globally
 // Call pass1 function only after reading the text areas
 document.getElementById('assembleBtn').addEventListener('click', function () {
+    if (inputArr.length === 0 || optabArr.length === 0) {
+        alert('Please enter the source code and optab');
+        return;
+    }
+   
+
     const pass1out = pass1(inputArr, optabArr);
     const intermediateArr = pass1out.intermediate.split('\n');
     for (let i = 0; i < intermediateArr.length; i++) {
@@ -149,7 +160,9 @@ document.getElementById('assembleBtn').addEventListener('click', function () {
         });
         objectcode2body.appendChild(tr);
     }
-
+    if(outputsection.classList.contains('hidden')) {
+        outputsection.classList.remove('hidden');
+    }
 
 
 });
