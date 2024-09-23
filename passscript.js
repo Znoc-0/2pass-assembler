@@ -68,8 +68,6 @@ document.getElementById('resetBtn').addEventListener('click', function () {
 
 });
 
-// Ensure inputArr and optabArr are available globally
-// Call pass1 function only after reading the text areas
 document.getElementById('assembleBtn').addEventListener('click', function () {
     if (inputArr.length === 0 || optabArr.length === 0) {
         alert('Please enter the source code and optab');
@@ -99,7 +97,7 @@ document.getElementById('assembleBtn').addEventListener('click', function () {
 
     const symtableBody = document.getElementById('symtabBody');
 
-    // Clear existing content
+    
     symtableBody.innerHTML = '';
 
     const symtabArr = pass1out.symtab.split('\n');
@@ -109,20 +107,20 @@ document.getElementById('assembleBtn').addEventListener('click', function () {
     const sysm = pass1out.symtab.split('\n');
 
     for (let i = 0; i < sysm.length; i++) {
-        // Trim and split into columns
+        
         const rowData = sysm[i].trim().split(/\s+/);
 
-        // Create a new table row
+        
         const tr = document.createElement('tr');
 
-        // Create cells for each piece of data
+        
         rowData.forEach(cellData => {
             const td = document.createElement('td');
-            td.textContent = cellData; // Set the text content
-            tr.appendChild(td); // Append cell to row
+            td.textContent = cellData; 
+            tr.appendChild(td); 
         });
 
-        // Append the row to the table body
+        
         symtableBody.appendChild(tr);
     }
     // intermediate output table
@@ -331,8 +329,8 @@ function pass2(optabArr, intermediateArr, symtabArr) {
 
     symtabArr.forEach((symLine) => {
         if (symLine[2] == 1) {
-            output = "AUGEYSTOOOO"
-            output2 = "AUGEYSTOOOO"
+            output = "blah"
+            output2 = "blahh"
         }
     })
 
