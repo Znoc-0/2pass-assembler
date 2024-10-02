@@ -11,7 +11,7 @@ function readFile(inputId, outputId) {
             const reader = new FileReader();
 
             reader.onload = function (e) {
-                document.getElementById(outputId).textContent = e.target.result;
+                document.getElementById(outputId).value = e.target.result;
             };
 
             reader.onerror = function () {
@@ -59,12 +59,17 @@ function readTextarea() {
 
 document.getElementById('assembleBtn').addEventListener('click', readTextarea);
 document.getElementById('resetBtn').addEventListener('click', function () {
-    document.getElementById('source_code_input_text').textContent = '';
-    document.getElementById('optab_input_text').textContent = '';
+    document.getElementById('source_code_input_text').value = '';
+    document.getElementById('optab_input_text').value = '';
+   // document.getElementById('optab_input_text').innerHTML = '';
     document.getElementById('intermediateBody').innerHTML = '';
     document.getElementById('symtabBody').innerHTML = '';
     document.getElementById('objectcodeBody').innerHTML = '';
     document.getElementById('outputBody').innerHTML = '';
+    document.getElementById('source_code_input').value = '';
+    document.getElementById('op_tab_input').value = '';
+    outputsection.classList.add('hidden');
+    
 
 });
 
