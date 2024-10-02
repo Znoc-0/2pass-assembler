@@ -329,8 +329,8 @@ function pass2(optabArr, intermediateArr, symtabArr) {
 
     symtabArr.forEach((symLine) => {
         if (symLine[2] == 1) {
-            output = "blah"
-            output2 = "blahh"
+            output = "error in input file"
+            output2 = "error in input file"
         }
     })
 
