@@ -40,7 +40,7 @@ function readTextarea() {
 
     // Process source text
     if (source_text.trim() === "") {
-       // alert('Please enter the source code.');
+        // alert('Please enter the source code.');
     } else {
         console.log('source code:', source_text);
         inputArr = source_text.split('\n').map(line => line.trim().split(/\s+/));
@@ -49,7 +49,7 @@ function readTextarea() {
 
     // Process optab text
     if (optab_text.trim() === "") {
-       // alert('Please enter the optab.');
+        // alert('Please enter the optab.');
     } else {
         console.log('optab:', optab_text);
         optabArr = optab_text.split('\n').map(line => line.trim().split(/\s+/));
@@ -61,7 +61,7 @@ document.getElementById('assembleBtn').addEventListener('click', readTextarea);
 document.getElementById('resetBtn').addEventListener('click', function () {
     document.getElementById('source_code_input_text').value = '';
     document.getElementById('optab_input_text').value = '';
-   // document.getElementById('optab_input_text').innerHTML = '';
+    // document.getElementById('optab_input_text').innerHTML = '';
     document.getElementById('intermediateBody').innerHTML = '';
     document.getElementById('symtabBody').innerHTML = '';
     document.getElementById('objectcodeBody').innerHTML = '';
@@ -69,7 +69,7 @@ document.getElementById('resetBtn').addEventListener('click', function () {
     document.getElementById('source_code_input').value = '';
     document.getElementById('op_tab_input').value = '';
     outputsection.classList.add('hidden');
-    
+
 
 });
 
@@ -78,7 +78,7 @@ document.getElementById('assembleBtn').addEventListener('click', function () {
         alert('Please enter the source code and optab');
         return;
     }
-   
+
 
     const pass1out = pass1(inputArr, optabArr);
     const intermediateArr = pass1out.intermediate.split('\n');
@@ -102,7 +102,7 @@ document.getElementById('assembleBtn').addEventListener('click', function () {
 
     const symtableBody = document.getElementById('symtabBody');
 
-    
+
     symtableBody.innerHTML = '';
 
     const symtabArr = pass1out.symtab.split('\n');
@@ -112,20 +112,20 @@ document.getElementById('assembleBtn').addEventListener('click', function () {
     const sysm = pass1out.symtab.split('\n');
 
     for (let i = 0; i < sysm.length; i++) {
-        
+
         const rowData = sysm[i].trim().split(/\s+/);
 
-        
+
         const tr = document.createElement('tr');
 
-        
+
         rowData.forEach(cellData => {
             const td = document.createElement('td');
-            td.textContent = cellData; 
-            tr.appendChild(td); 
+            td.textContent = cellData;
+            tr.appendChild(td);
         });
 
-        
+
         symtableBody.appendChild(tr);
     }
     // intermediate output table
@@ -151,7 +151,7 @@ document.getElementById('assembleBtn').addEventListener('click', function () {
     const po = pass2out.output2.toUpperCase();
     const objectcode2body = document.getElementById('outputBody');
     const op = po.split('\n');
-    
+
     objectcode2body.innerHTML = '';
     for (let i = 0; i < op.length; i++) {
         const rowData = op[i].trim().split(/\s+/);
@@ -163,7 +163,7 @@ document.getElementById('assembleBtn').addEventListener('click', function () {
         });
         objectcode2body.appendChild(tr);
     }
-    if(outputsection.classList.contains('hidden')) {
+    if (outputsection.classList.contains('hidden')) {
         outputsection.classList.remove('hidden');
     }
 
@@ -254,19 +254,25 @@ function pass1(inputArr, optabArr) {
 function pass2(optabArr, intermediateArr, symtabArr) {
     let i = 1, objectCode
     let objectCodeArr = []
-
+    
     while (intermediateArr[i][2] !== 'END') {
         let found = false
         optabArr.forEach((opLine) => {
             if (opLine[0] === intermediateArr[i][2]) {
                 found = true
-                objectCode = opLine[1]
-                symtabArr.forEach((symLine) => {
-                    if (symLine[0] === intermediateArr[i][3]) {
-                        objectCode += symLine[1]
-                        objectCodeArr.push(objectCode)
-                    }
-                })
+
+                if (intermediateArr[i][2] === 'RSUB') {
+                    objectCode = opLine[1] + "0000"
+                    objectCodeArr.push(objectCode)
+                } else {
+                    objectCode = opLine[1]
+                    symtabArr.forEach((symLine) => {
+                        if (symLine[0] === intermediateArr[i][3]) {
+                            objectCode += symLine[1]
+                            objectCodeArr.push(objectCode)
+                        }
+                    })
+                }
             }
         })
 
