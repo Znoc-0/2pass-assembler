@@ -55,6 +55,15 @@ STA     23
 ADD     01
 JNC     08
 ```
+## 📸 Snapshots
+<div style="display: flex; justify-content: space-around;">
+    <div style="margin-right: 15rem;">
+        <img src="https://envs.sh/IpO.png" alt="SIC Assembler Interface"  />
+    </div>
+    <div>
+        <img src="https://envs.sh/Ipg.png" alt="SIC Assembler Output" />
+    </div>
+</div>
 📝 License
 This project is licensed under the MIT License - see the LICENSE file for details.
 
